@@ -6,7 +6,8 @@
    </head>
    <body>
       <div>Chat</div>
- 
+      <div>이름 : <%= params.name %></div>
+      
       <input type="text" id="sendMsg"/><button id="chatBtn">Chat</button>
       <ul id="msg"></ul>
 
@@ -39,7 +40,6 @@
          socket.on('chat message', (msg) => {
           $('#msg').append($('<li>').text(msg));
          })
-
 
         //  socket.on('news', function (data) {
         //     console.log(data);

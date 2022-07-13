@@ -8,6 +8,7 @@
 <body>
   <div class="container">
     <h3>Socket.io Chat Example</h3>
+    <h4><strong id="name"><%=params.name %></strong> 님 접속</h4>
     <form class="form-inline">
       <div class="form-group">
         <label for="msgForm">Message: </label>
@@ -23,11 +24,12 @@
   $(function(){
     // socket.io 서버에 접속한다
     var socket = io();
+    let name = $("#name").text();
 
     // 서버로 자신의 정보를 전송한다.
     socket.emit("login", {
       // name: "ungmo2",
-      name: prompt('이름을 입력하세요'),
+      name: name,
       userid: "ungmo2@gmail.com"
     });
 

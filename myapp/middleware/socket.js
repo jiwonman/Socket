@@ -1,7 +1,13 @@
 const socket = require('socket.io');
+const app = require('../app');
 
 module.exports = (server) => {
     const io = socket(server, { path: '/socket.io'});
+
+    app.set('io', io);
+
+    const room = io.of('/room');
+    const chat = io.of('/chat');
 
     io.on('connection', (socket) => {
         const req = socket.request;
@@ -14,6 +20,7 @@ module.exports = (server) => {
         //     console.log('클라이언트 접속 해제', ip, socket.id);
         //     clearInterval(socket.interval);
         // });
+
         socket.on('login', (data) => {
             console.log('Client logged-in:\n name: ' + data.name + '\n userid: ' + data.userid);
             
@@ -22,7 +29,6 @@ module.exports = (server) => {
 
             io.emit('login', data.name);
         })
-
 
         socket.on('error', (error) => {
             console.log(error);
